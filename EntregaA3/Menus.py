@@ -48,11 +48,11 @@ def menu_consultas():
 ##### espaço para defs que vao contribir com as consulta no servidor
 
 
-### def tot_venda_vendedor
-### def tot_venda_filial
-### def tot_venda_periodo
-### def melhor_loja
-### def melhor_vendedor
+### def tot_venda_vendedor():
+### def tot_venda_filial():
+### def tot_venda_periodo():
+### def melhor_loja():
+### def melhor_vendedor():
 
 ######
 
@@ -72,3 +72,5 @@ def vendedor_menu_princ():
     print("4 - Voltar")
 
     Gprinc_escolha = int(input("Digite sua opção > "))
+
+### def controle_vendas():
