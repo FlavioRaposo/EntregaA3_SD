@@ -1,6 +1,3 @@
-from servidorUDP import switch_case
-from servidor_Menu import menuGerente_principal
-
 
 def exibir_tela_boas_vindas():
     print("==================================")
@@ -11,7 +8,12 @@ def exibir_tela_boas_vindas():
     print("Comunicando com o servidor")
 #Cliente conectando ao Servidor
 
-
+def switch_case(argument):
+    switcher = {
+        1: "entrando como vendedor",
+        2: "entrando como gerente"
+    }
+    return switcher.get(argument, "Opção inválida")
 
  
 
@@ -34,5 +36,3 @@ resultado = switch_case(respostaMenuServidor)
 print(resultado)
 
 
-menuGerente_principal()
-   
