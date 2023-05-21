@@ -1,44 +1,37 @@
-
+from MenuGerente import geren_principal
+import socket
 # ------------------
 # Cliente Socket UDP
 # ------------------
 
-print("Eu sou um CLIENTE UDP!")
+print("Eu sou um CLIENTE vendedor")
 
 
 
-# Importando a biblioteca'
-import socket
 
 # Definindo ip e porta
 HOST = 'localhost'  # Endereco IP do Servidor
-PORT = 9000              # Porta que o Servidor estará escutando
+PORT = 9002
 
-# Criando o socket
-cliente2 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	# Criar um socket UDP
+cliente_Vendedor = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+cliente_Vendedor.bind((HOST, PORT))
 
-# Define o endereco do servidor (Ip e porta)
-enderecoServidor = ('localhost', 9000)
+while True:
+	# Enviar mensagem para o cliente 2
+	print("... Entrando com nova mensagem de texto para gerente")
+	mensagem = input("digite sua mensagem aqui.")
+	cliente_Vendedor.sendto(mensagem.encode(), ('localhost', 9003))
 
-print("Vou começar a mandar mensagens para o servidor.")
+	# Receber resposta do cliente 2
+	dados, endereco = cliente_Vendedor.recvfrom(9003)
+	resposta = dados.decode()
+	print("Resposta do gerente:", resposta)
+	if mensagem == "sair":
+		cliente_Vendedor.close()
+		geren_principal()
 
-# Aqui começa a conversa
-print("Entrando com mensagem de texto para enviar")
-print("(Para sair digite 'fim')")
-mensagem = input("Mensagem > ")
+	# Fechar o socket
 
-while (mensagem != "fim"):
-	# Enviando mensagem ao servidor
-	print("... Vou mandar uma mensagem para o servidor")
-	cliente2.sendto(mensagem.encode("utf-8"), enderecoServidor)
 
-	# Recebendo resposta do servidor
-	msg, endereco = cliente2.recvfrom(9000)
-	print("... O servidor me respondeu:", msg.decode("utf-8"))
 
-	# Obtendo nova mensagem do usuário
-	print("... Entrando com nova mensagem de texto para enviar")
-	mensagem = input("Mensagem > ")
-
-print("... Encerrando o cliente")
-cliente2.close()

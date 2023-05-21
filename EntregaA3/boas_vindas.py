@@ -1,4 +1,5 @@
 from servidorUDP import switch_case
+from servidor_Menu import menuGerente_principal
 
 
 def exibir_tela_boas_vindas():
@@ -33,5 +34,5 @@ resultado = switch_case(respostaMenuServidor)
 print(resultado)
 
 
-
+menuGerente_principal()
    
