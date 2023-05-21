@@ -4,6 +4,8 @@ from inputs import input_emitir_pedido
 
 def geren_principal():
     print("==================================")
+    print("          Menu Gerente            ")
+    print("==================================")
     print("    Escolha a Opção desejada")
     print("==================================")
     print("1 - Emitir Pedido")
@@ -46,8 +48,27 @@ def menu_consultas():
 ##### espaço para defs que vao contribir com as consulta no servidor
 
 
-
-
+### def tot_venda_vendedor
+### def tot_venda_filial
+### def tot_venda_periodo
+### def melhor_loja
+### def melhor_vendedor
 
 ######
 
+## def msg_vendedor():
+
+#### inicio do menu Vendedor
+
+def vendedor_menu_princ():
+    print("==================================")
+    print("          Menu Vendedor            ")
+    print("==================================")
+    print("    Escolha a Opção desejada")
+    print("==================================")
+    print("1 - Emitir Pedido")
+    print("2 - Meu controle de vendas")
+    print("3 - Mensagem para o Gerente")
+    print("4 - Voltar")
+
+    Gprinc_escolha = int(input("Digite sua opção > "))
