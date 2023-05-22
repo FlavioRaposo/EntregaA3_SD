@@ -1,22 +1,27 @@
 ## criar tabela de log para registros de entrada no sistema, caso ele escolha
 ## uma opçao o na tela de boas vinda vai enviar codigo do vendedor e data de acesso
-
 import sqlite3
 
+
+
+def criar_tabela():
+
 # Conecta ao banco de dados SQLite (se o arquivo não existir, ele será criado)
-conexao = sqlite3.connect('lojao.db')
+    conexao = sqlite3.connect('emitir_nota.db')
 
 # Cria um cursor para executar comandos SQL
-cursor = conexao.cursor()
+    cursor = conexao.cursor()
 
 # Cria a tabela "vendas"
-cursor.execute("CREATE TABLE vendas (id INTEGER PRIMARY KEY,codigo_op INTEGER,vendedor TEXT,polo_de_venda TEXT,data_de_venda DATE,valor_de_venda REAL)")
+    cursor.execute("CREATE TABLE vendas (id INTEGER PRIMARY KEY,codigo_op INTEGER,vendedor TEXT,polo_de_venda TEXT,data_de_venda DATE,valor_de_venda REAL)")
 
 # Confirma as alterações no banco de dados
-conexao.commit()
+    conexao.commit()
 
 # Fecha a conexão
-conexao.close()
+    conexao.close()
+
+
 
 def consultar_dados():
     # Conectando ao banco de dados
@@ -94,6 +99,30 @@ def soma_tabela():
 
     # Fechando a conexão com o banco de dados
     conn.close()
+
+
+def visualizar_dados():
+    conexao = sqlite3.connect('emitir_nota.db')
+    cursor = conexao.cursor()
+
+    # Executar consulta SQL para selecionar todos os registros da tabela
+    cursor.execute("SELECT * FROM vendas")
+    rows = cursor.fetchall()
+
+    # Exibir os dados recuperados
+    for row in rows:
+        print(row)
+
+    conexao.close()
+
+# Chamar a função para visualizar os dados
+visualizar_dados()
+
+
+
+
+
+
 
 
 

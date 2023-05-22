@@ -1,6 +1,6 @@
 ## falta colocar while em alguns menu com switch
 
-from inputs import input_emitir_pedido
+from Emitir_pedido import input_emitir_pedido
 
 def geren_principal():
     print("==================================")
