@@ -1,5 +1,5 @@
 ## falta colocar while em alguns menu com switch
-
+import sqlite3
 from Emitir_pedido import input_emitir_pedido
 
 def geren_principal():
@@ -48,7 +48,24 @@ def menu_consultas():
 ##### espaço para defs que vao contribir com as consulta no servidor
 
 
-### def tot_venda_vendedor():
+def tot_venda_vendedor(vendedor):
+    conexao = sqlite3.connect('emitir_nota.db')
+    cursor = conexao.cursor()
+
+        # Executar consulta SQL para somar as vendas do vendedor especificado
+        cursor.execute("SELECT SUM(quantidade) FROM vendas WHERE vendedor = ?", (vendedor,))
+        total_vendas = cursor.fetchone()[0]
+
+        conn.close()
+
+        return total_vendas
+
+    # Chamar a função para obter a soma das vendas de um vendedor específico
+    vendedor = input("Digite o nome do vendedor: ")
+    total_vendas = somar_vendas_por_vendedor(vendedor)
+
+    print("Total de vendas do vendedor", vendedor, ":", total_vendas)
+
 ### def tot_venda_filial():
 ### def tot_venda_periodo():
 ### def melhor_loja():

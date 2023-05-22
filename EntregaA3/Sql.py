@@ -25,8 +25,8 @@ def criar_tabela():
 
 def consultar_dados():
     # Conectando ao banco de dados
-    conn = sqlite3.connect('vendas.db')
-    cursor = conn.cursor()
+    conexao = sqlite3.connect('emitir_nota.db')
+    cursor = conexao.cursor()
 
     # Realizando a consulta na tabela
     cursor.execute('SELECT * FROM vendas')
@@ -41,7 +41,9 @@ def consultar_dados():
         print(f"{venda[0]}\t{venda[1]}\t\t{venda[2]}")
 
     # Fechando a conexão com o banco de dados
-    conn.close()
+    conexao.close()
+
+consultar_dados()
 
 def apagar_dados():
     # Conectando ao banco de dados
@@ -85,8 +87,8 @@ def consultar_tables():
 
 def soma_tabela():
     # Conectando ao banco de dados
-    conn = sqlite3.connect('dados.db')
-    cursor = conn.cursor()
+    conexao = sqlite3.connect('emitir_nota.db')
+    cursor = conexao.cursor()
 
     # Executando a consulta para somar os valores
     cursor.execute('SELECT SUM(valor) FROM tabela')
@@ -116,7 +118,7 @@ def visualizar_dados():
     conexao.close()
 
 # Chamar a função para visualizar os dados
-visualizar_dados()
+
 
 
 
