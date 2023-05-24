@@ -46,5 +46,18 @@ print("obrigado")
 #			break
 
 
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((host, port))
 
+print(f"Servidor UDP aguardando conexões em {host}:{port}")
 
+# Loop infinito para receber e processar requisições
+while True:
+    data, address = sock.recvfrom(1024)
+    print(f"Requisição recebida de {address[0]}:{address[1]}")
+
+    # Chamada da função e obtenção do resultado
+    resultado = minha_funcao()
+
+    # Envio do resultado de volta para o cliente
+    sock.sendto(resultado.encode(), address)

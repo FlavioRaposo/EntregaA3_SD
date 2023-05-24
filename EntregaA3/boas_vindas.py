@@ -61,8 +61,8 @@ def menu_Principal():
     print("==================================")
     print(" Escolha a opção desejada")
     print("==================================")
-    print("Opção 1 - Entrar como Vendedor")
-    print("Opção 2 - Entrar como Gerente")
+    print("1 - Entrar como Vendedor")
+    print("2 - Entrar como Gerente")
     print("") 
 
 def comunicacaoServidor():

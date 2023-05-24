@@ -1,6 +1,6 @@
 ## falta colocar while em alguns menu com switch
 import sqlite3
-from Emitir_pedido import input_emitir_pedido
+
 
 def geren_principal():
     print("==================================")
@@ -15,7 +15,7 @@ def geren_principal():
 
     Gprinc_escolha = int(input("Digite sua opção > "))
 
-def emitir_pedidos():
+def menu_emitir_pedidos():
     input_emitir_pedido()
     respostasn = ""
 
@@ -24,12 +24,13 @@ def emitir_pedidos():
         respostasn = input("Deseja emitir outro pedido?")
 
         if respostasn.lower() == "sim":
-            emitir_pedidos()
+            menu_emitir_pedidos()
         elif respostasn.lower() == "não":
             print("resposta do servidor aperte enter para voltar")
 
         else:
             print("Por favor, responda com 'sim' ou 'não'.")
+
 
 def menu_consultas():
     print("==================================")
@@ -53,21 +54,83 @@ def tot_venda_vendedor(vendedor):
     cursor = conexao.cursor()
 
         # Executar consulta SQL para somar as vendas do vendedor especificado
-        cursor.execute("SELECT SUM(quantidade) FROM vendas WHERE vendedor = ?", (vendedor,))
-        total_vendas = cursor.fetchone()[0]
+    cursor.execute("SELECT SUM(valor_de_venda) FROM vendas WHERE vendedor = ?", (vendedor,))
 
-        conn.close()
+    total_vendas = cursor.fetchone()[0]
 
-        return total_vendas
+    conexao.close()
 
-    # Chamar a função para obter a soma das vendas de um vendedor específico
-    vendedor = input("Digite o nome do vendedor: ")
-    total_vendas = somar_vendas_por_vendedor(vendedor)
+    return total_vendas
 
-    print("Total de vendas do vendedor", vendedor, ":", total_vendas)
+# Chamar a soma das vendas de um vendedor específico
+print("======================================")
+print("     Total de vendas por vendedor     ")
+print("======================================")
+vendedor = input("Digite o nome do vendedor: \n")
+total_vendas = tot_venda_vendedor(vendedor)
 
-### def tot_venda_filial():
+print("===================================+++++===")
+print("Total de vendas do ", vendedor, " é de: R$", "%.2f"%total_vendas)
+print("====================================+++++==")
+
+
+def tot_venda_filial(polo_de_venda):
+    conexao = sqlite3.connect('emitir_nota.db')
+    cursor = conexao.cursor()
+
+        # Executar consulta SQL para somar as vendas do vendedor especificado
+    cursor.execute("SELECT SUM(valor_de_venda) FROM vendas WHERE polo_de_venda = ?", (polo_de_venda,))
+
+    total_vendas_filial = cursor.fetchone()[0]
+
+    conexao.close()
+
+    return total_vendas_filial
+
+# Chamar a soma das vendas de um vendedor específico
+print("======================================")
+print("     Total de vendas por filial       ")
+print("======================================")
+print("Salvador - Lauro de Freitas - Camaçari")
+print("======================================")
+
+polo_de_venda = input("Digite o nome do Polo de venda: \n")
+total_vendas_filial = tot_venda_filial(polo_de_venda)
+
+print("===================================+++++===")
+print(f"Total de vendas da filial", polo_de_venda , " é de: R$","%.2f"%total_vendas)
+print("====================================+++++==")
+
+
+
 ### def tot_venda_periodo():
+def tot_venda_periodo(data_inicial,data_final):
+    conexao = sqlite3.connect('emitir_nota.db')
+    cursor = conexao.cursor()
+
+        # Executar consulta SQL para somar as vendas do vendedor especificado
+    cursor.execute("SELECT SUM(valor_de_venda) FROM vendas WHERE data_de_venda BETWEEN ? AND = ?", (data_inicial, data_final))
+
+    vendas_periodo = cursor.fetchone()[0]
+
+    conexao.close()
+
+    return vendas_periodo
+
+# Chamar a soma das vendas de um vendedor específico
+print("======================================")
+print("     Total de vendas por Periodo       ")
+print("======================================")
+
+data_inicial = input("Digite a data inicial: \n")
+data_final = input("Digite a data final: \n")
+
+vendas_periodo = tot_venda_periodo(data_inicial,data_final)
+
+print("===================================+++++===")
+print(f"Total de vendas da data de ",data_inicial," até ",data_final," é de: R$","%.2f"vendas_periodo)
+print("====================================+++++==")
+
 ### def melhor_loja():
 ### def melhor_vendedor():
 
