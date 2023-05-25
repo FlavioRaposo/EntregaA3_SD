@@ -63,15 +63,15 @@ def tot_venda_vendedor(vendedor):
     return total_vendas
 
 # Chamar a soma das vendas de um vendedor específico
-print("======================================")
-print("     Total de vendas por vendedor     ")
-print("======================================")
-vendedor = input("Digite o nome do vendedor: \n")
-total_vendas = tot_venda_vendedor(vendedor)
+    print("======================================")
+    print("     Total de vendas por vendedor     ")
+    print("======================================")
+    vendedor = input("Digite o nome do vendedor: \n")
+    total_vendas = tot_venda_vendedor(vendedor)
 
-print("===================================+++++===")
-print("Total de vendas do ", vendedor, " é de: R$", "%.2f"%total_vendas)
-print("====================================+++++==")
+    print("===================================+++++===")
+    print("Total de vendas do ", vendedor, " é de: R$", "%.2f"%total_vendas)
+    print("====================================+++++==")
 
 
 def tot_venda_filial(polo_de_venda):
@@ -88,18 +88,18 @@ def tot_venda_filial(polo_de_venda):
     return total_vendas_filial
 
 # Chamar a soma das vendas de um vendedor específico
-print("======================================")
-print("     Total de vendas por filial       ")
-print("======================================")
-print("Salvador - Lauro de Freitas - Camaçari")
-print("======================================")
+    print("======================================")
+    print("     Total de vendas por filial       ")
+    print("======================================")
+    print("Salvador - Lauro de Freitas - Camaçari")
+    print("======================================")
 
-polo_de_venda = input("Digite o nome do Polo de venda: \n")
-total_vendas_filial = tot_venda_filial(polo_de_venda)
+    polo_de_venda = input("Digite o nome do Polo de venda: \n")
+    total_vendas_filial = tot_venda_filial(polo_de_venda)
 
-print("===================================+++++===")
-print(f"Total de vendas da filial", polo_de_venda , " é de: R$","%.2f"%total_vendas)
-print("====================================+++++==")
+    print("===================================+++++===")
+    print(f"Total de vendas da filial", polo_de_venda , " é de: R$","%.2f"%total_vendas)
+    print("====================================+++++==")
 
 
 
@@ -109,30 +109,81 @@ def tot_venda_periodo(data_inicial,data_final):
     cursor = conexao.cursor()
 
         # Executar consulta SQL para somar as vendas do vendedor especificado
-    cursor.execute("SELECT SUM(valor_de_venda) FROM vendas WHERE data_de_venda BETWEEN ? AND = ?", (data_inicial, data_final))
+    cursor.execute("SELECT * FROM vendas WHERE data_de_venda BETWEEN ? AND  ?", (data_inicial, data_final))
 
-    vendas_periodo = cursor.fetchone()[0]
+    vendas_periodo = cursor.fetchone()
+
+    for linha in vendas_periodo:
+        print(linha)
 
     conexao.close()
 
-    return vendas_periodo
 
 # Chamar a soma das vendas de um vendedor específico
-print("======================================")
-print("     Total de vendas por Periodo       ")
-print("======================================")
+    print("======================================")
+    print("     Total de vendas por Periodo       ")
+    print("======================================")
 
-data_inicial = input("Digite a data inicial: \n")
-data_final = input("Digite a data final: \n")
+    data_inicial = input("Digite a data inicial: \n")
+    data_final = input("Digite a data final: \n")
 
-vendas_periodo = tot_venda_periodo(data_inicial,data_final)
+    tot_venda_periodo(data_inicial,data_final)
 
-print("===================================+++++===")
-print(f"Total de vendas da data de ",data_inicial," até ",data_final," é de: R$","%.2f"vendas_periodo)
-print("====================================+++++==")
+    print("===================================+++++===")
+    print(f"Total de vendas da data de ",data_inicial," até ",data_final," é de: R$")
+    print("====================================+++++==")
 
 ### def melhor_loja():
+def tot_melhor_loja():
+    def loja_sal():
+        conexao = sqlite3.connect('emitir_nota.db')
+        cursor = conexao.cursor()
+        loja_um = 'salvador'
+        # Executar consulta SQL para somar as vendas do vendedor especificado
+        cursor.execute("SELECT SUM(valor_de_venda) FROM vendas WHERE polo_de_venda = ?",(loja_um,))
+        salvador_soma = cursor.fetchone()[0]
+        return salvador_soma
+        conexao.close()
+
+    def loja_lau():
+        conexao = sqlite3.connect('emitir_nota.db')
+        cursor = conexao.cursor()
+        loja_dois = 'lauro de freitas'
+        cursor.execute("SELECT SUM(valor_de_venda) FROM vendas WHERE polo_de_venda = ?", (loja_dois,))
+        lauro_soma = cursor.fetchone()[0]
+        return lauro_soma
+        conexao.close()
+
+    def loja_cam():
+        conexao = sqlite3.connect('emitir_nota.db')
+        cursor = conexao.cursor()
+        loja_tres = 'camaçari'
+        cursor.execute("SELECT SUM(valor_de_venda) FROM vendas WHERE polo_de_venda = ?", (loja_tres,))
+        camacari_soma = cursor.fetchone()[0]
+        return camacari_soma
+        conexao.close()
+
+    salvador_soma = loja_sal()
+    lauro_soma = loja_lau()
+    camacari_soma = loja_cam()
+
+       # Verificando qual é o maior
+    if salvador_soma >= lauro_soma and salvador_soma >= camacari_soma:
+        print("Salvador é a lider de vendas com R$ ",salvador_soma)
+    elif lauro_soma >= salvador_soma and lauro_soma >= camacari_soma:
+        print("Lauro de Freitas é a lider de vendas com R$ ",lauro_soma)
+    else:
+        print("Camaçari é a lider de vendas com R$ ",camacari_soma)
+
+
+    input("Aperte zero para voltar\n")
+
+    # voltar para def menu_consultas():
+
+tot_melhor_loja()
+
 ### def melhor_vendedor():
+## vou criar uma tabel a chamada 
 
 ######
 

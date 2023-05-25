@@ -120,6 +120,33 @@ def visualizar_dados():
 # Chamar a função para visualizar os dados
 
 
+# Conectando ao banco de dados
+def test_data():
+    conn = sqlite3.connect('emitir_nota.db')
+    cursor = conn.cursor()
+
+    # Definindo as datas inicial e final
+    data_inicial = '2023-01-01'
+    data_final = '2023-12-31'
+
+# Executando a consulta para encontrar valores entre as datas
+    cursor.execute("SELECT * FROM vendas WHERE data_de_venda BETWEEN ? AND ?", (data_inicial, data_final))
+
+# Recuperando os resultados da consulta
+    resultados = cursor.fetchall()
+
+
+
+# Exibindo os resultados
+    for linha in resultados:
+        print(linha)
+
+# Fechando a conexão com o banco de dados
+    conn.close()
+
+test_data()
+
+
 
 
 
