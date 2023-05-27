@@ -3,7 +3,7 @@ import sqlite3
 
 def input_emitir_pedido(codigo_vendedor,vendedor,polo_de_venda,data_de_venda,valor_de_venda):
     try:
-        conexao = sqlite3.connect('emitir_nota.db')
+        conexao = sqlite3.connect('../emitir_nota.db')
         cursor = conexao.cursor()
         # Inserir dados na tabela
         cursor.execute(

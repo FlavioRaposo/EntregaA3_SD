@@ -1,19 +1,36 @@
-## falta colocar while em alguns menu com switch
 import sqlite3
-
+from Emitir_pedido import input_emitir_pedido
+import sys
 
 def geren_principal():
-    print("==================================")
-    print("          Menu Gerente            ")
-    print("==================================")
-    print("    Escolha a Opção desejada")
-    print("==================================")
-    print("1 - Emitir Pedido")
-    print("2 - Fazer Consultas")
-    print("3 - Mensagem para o vendedor")
-    print("4 - Voltar")
 
-    Gprinc_escolha = int(input("Digite sua opção > "))
+        print("==================================")
+        print("   Bem-vindo(a) à loja Marabrás!  ")
+        print("==================================")
+        print("          Menu Gerente            ")
+        print("==================================")
+        print("    Escolha a Opção desejada")
+        print("==================================")
+        print("1 - Emitir Pedido")
+        print("2 - Fazer Consultas")
+        print("3 - Mensagem para o vendedor")
+        print("4 - Sair")
+
+        Gprinc_escolha = int(input("Digite sua opção > \n"))
+        valor = Gprinc_escolha
+        if valor == 1:
+            menu_emitir_pedidos()
+        elif valor == 2:
+            menu_consultas()
+        elif valor == 3:
+            print("Executando case 3")
+        elif valor == 4:
+            sys.exit()
+        else:
+            print("Executando caso padrão")
+
+
+geren_principal()
 
 def menu_emitir_pedidos():
     input_emitir_pedido()
@@ -43,10 +60,22 @@ def menu_consultas():
     print("5 - Melhor Vendedor acumulado")
     print("6 - Voltar")
 
-    Mconsu_escolha = int(input("Digite sua opção > "))
-
-
-##### espaço para defs que vao contribir com as consulta no servidor
+    Mconsu_escolha = int(input("Digite sua opção abaixo\n"))
+    valor = Mconsu_escolha
+    if valor == 1:
+        tot_venda_vendedor()
+    elif valor == 2:
+        tot_venda_filial()
+    elif valor == 3:
+        tot_venda_periodo()
+    elif valor == 4:
+        tot_melhor_loja()
+    elif valor == 5:
+        pass
+    elif valor == 6:
+        geren_principal()
+    else:
+        print("Executando caso padrão")
 
 
 def tot_venda_vendedor(vendedor):
@@ -62,16 +91,16 @@ def tot_venda_vendedor(vendedor):
 
     return total_vendas
 
-# Chamar a soma das vendas de um vendedor específico
-    print("======================================")
-    print("     Total de vendas por vendedor     ")
-    print("======================================")
-    vendedor = input("Digite o nome do vendedor: \n")
-    total_vendas = tot_venda_vendedor(vendedor)
+    # Chamar a soma das vendas de um vendedor específico
+print("======================================")
+print("     Total de vendas por vendedor     ")
+print("======================================")
+vendedor = input("Digite o nome do vendedor: \n")
+total_vendas = tot_venda_vendedor(vendedor)
 
-    print("===================================+++++===")
-    print("Total de vendas do ", vendedor, " é de: R$", "%.2f"%total_vendas)
-    print("====================================+++++==")
+print("===================================+++++===")
+print("Total de vendas do ", vendedor, " é de: R$", "%.2f"%total_vendas)
+print("====================================+++++==")
 
 
 def tot_venda_filial(polo_de_venda):
@@ -88,22 +117,22 @@ def tot_venda_filial(polo_de_venda):
     return total_vendas_filial
 
 # Chamar a soma das vendas de um vendedor específico
-    print("======================================")
-    print("     Total de vendas por filial       ")
-    print("======================================")
-    print("Salvador - Lauro de Freitas - Camaçari")
-    print("======================================")
+print("======================================")
+print("     Total de vendas por filial       ")
+print("======================================")
+print("Salvador - Lauro de Freitas - Camaçari")
+print("======================================")
 
-    polo_de_venda = input("Digite o nome do Polo de venda: \n")
-    total_vendas_filial = tot_venda_filial(polo_de_venda)
+polo_de_venda = input("Digite o nome do Polo de venda: \n")
+total_vendas_filial = tot_venda_filial(polo_de_venda)
 
-    print("===================================+++++===")
-    print(f"Total de vendas da filial", polo_de_venda , " é de: R$","%.2f"%total_vendas)
-    print("====================================+++++==")
+print("===================================+++++===")
+print(f"Total de vendas da filial", polo_de_venda , " é de: R$","%.2f"%total_vendas)
+print("====================================+++++==")
 
 
 
-### def tot_venda_periodo():
+### CORRIGIR FUNCAO
 def tot_venda_periodo(data_inicial,data_final):
     conexao = sqlite3.connect('emitir_nota.db')
     cursor = conexao.cursor()
@@ -117,8 +146,6 @@ def tot_venda_periodo(data_inicial,data_final):
         print(linha)
 
     conexao.close()
-
-
 # Chamar a soma das vendas de um vendedor específico
     print("======================================")
     print("     Total de vendas por Periodo       ")
@@ -133,7 +160,7 @@ def tot_venda_periodo(data_inicial,data_final):
     print(f"Total de vendas da data de ",data_inicial," até ",data_final," é de: R$")
     print("====================================+++++==")
 
-### def melhor_loja():
+
 def tot_melhor_loja():
     def loja_sal():
         conexao = sqlite3.connect('emitir_nota.db')
@@ -181,27 +208,3 @@ def tot_melhor_loja():
     # voltar para def menu_consultas():
 
 tot_melhor_loja()
-
-### def melhor_vendedor():
-## vou criar uma tabel a chamada 
-
-######
-
-## def msg_vendedor():
-
-#### inicio do menu Vendedor
-
-def vendedor_menu_princ():
-    print("==================================")
-    print("          Menu Vendedor            ")
-    print("==================================")
-    print("    Escolha a Opção desejada")
-    print("==================================")
-    print("1 - Emitir Pedido")
-    print("2 - Meu controle de vendas")
-    print("3 - Mensagem para o Gerente")
-    print("4 - Voltar")
-
-    Gprinc_escolha = int(input("Digite sua opção > "))
-
-### def controle_vendas():
